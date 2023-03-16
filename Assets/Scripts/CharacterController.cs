@@ -25,10 +25,7 @@ public class CharacterController : MonoBehaviour
         isMoving = agent.velocity.magnitude > 0.1f;
     }
 
-    public void MoveToTarget(Transform target)
-    {
-        moveTarget = target;
-    }
+    public void MoveToTarget(Transform target) => moveTarget = target;
 
     public void LookTowards(Vector3 direction)
     {
@@ -44,6 +41,6 @@ public class CharacterController : MonoBehaviour
     public void StopMovement()
     {
         agent.isStopped = true;
-        isMoving = false;
+        moveTarget = null;
     }
 }

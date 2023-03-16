@@ -3,6 +3,7 @@ using UnityEngine;
 public class Player : Character
 {
     public static Player current;
+
     private Animator anim;
     private float lastAttackTime;
 
