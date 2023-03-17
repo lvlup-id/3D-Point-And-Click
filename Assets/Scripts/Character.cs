@@ -18,9 +18,17 @@ public class Character : MonoBehaviour
     public event UnityAction onTakeDamage;
     public event UnityAction onDie;
 
+    public delegate void OnTakeDamageD(float newHp);
+
     protected virtual void Awake()
     {
         controller = GetComponent<CharacterController>();
+        healthbarPrefab = Instantiate(
+            healthbarPrefab,
+            transform.position + healthbarPrefab.transform.position,
+            Quaternion.identity,
+            transform
+        );
     }
 
     public virtual void SetTarget(Character t)
@@ -45,6 +53,8 @@ public class Character : MonoBehaviour
     public virtual void Die()
     {
         isDead = true;
+        target = null;
+        controller.StopMovement();
         onDie?.Invoke();
         Destroy(gameObject, 3f);
     }

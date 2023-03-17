@@ -1,18 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterHelper : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    Character character;
+    private void Awake()
     {
-        
+        character = GetComponentInParent<Character>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnAttack()
     {
-        
+        character.AttackTarget();
     }
 }

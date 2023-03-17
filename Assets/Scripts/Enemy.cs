@@ -22,7 +22,14 @@ public class Enemy : Character
 
     private void Update()
     {
-        if (target == null || target.isDead) return;
+        if (target == null) return;
+        if (target.isDead)
+        {
+            target = null;
+            controller.StopMovement();
+            anim.SetBool("isMoving", false);
+            return;
+        }
 
         targetDistance = Vector3.Distance(transform.position, target.transform.position);
 
@@ -43,6 +50,7 @@ public class Enemy : Character
 
     void IdleUpdate()
     {
+        controller.StopMovement();
         if (targetDistance < chaseRange && targetDistance > attackRange)
             SetState(State.Chase);
         else if (targetDistance < attackRange)
@@ -89,5 +97,6 @@ public class Enemy : Character
     public override void Die()
     {
         base.Die();
+        anim.SetBool("isDead", true);
     }
 }
